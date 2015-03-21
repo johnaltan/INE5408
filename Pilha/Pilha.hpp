@@ -1,45 +1,37 @@
+#include "../Vetor/Vetor.hpp"
 template<typename T>
-class Pilha {
+class Pilha : private Vetor<T>{
  private:
-        int posicaoTopo, tamanho;
-        T *pilha;
 
  public:
-        Pilha() {
-            posicaoTopo = -1;
-            tamanho = 0;
-        }
-        Pilha<T>(int t) {
-            pilha = new T[t];
-            posicaoTopo = -1;
-            tamanho = t;
-        }
+        Pilha(int t) : Vetor<T>(t) {}
+
         void empilha(T dado) {
-            if (PilhaCheia()) throw "Pilha cheia";
-            pilha[++posicaoTopo] = dado;
+            Vetor<T>::adiciona(dado);
         }
+        
         T desempilha() {
-            if (PilhaVazia()) throw "Pilha vazia";
-            posicaoTopo--;
-            return pilha[posicaoTopo + 1];
+            return Vetor<T>::retiraUltimo();
         }
+
         T topo() {
-            return pilha[posicaoTopo];
+            return Vetor<T>::consultaUltimo();
         }
+
         int getPosTopo() {
-            if (PilhaVazia()) throw "Pilha vazia";
-            return posicaoTopo;
+            return Vetor<T>::getIndice();
         }
+
         void limparPilha() {
-            posicaoTopo = -1;
+            Vetor<T>::limpa();
         }
+
         bool PilhaVazia() {
-            if (posicaoTopo < 0) return true;
-            return false;
+            return Vetor<T>::estaVazio();
         }
+
         bool PilhaCheia() {
-            if (posicaoTopo >= (tamanho - 1)) return true;
-            return false;
+            return Vetor<T>::estaCheio();
         }
 };
 
