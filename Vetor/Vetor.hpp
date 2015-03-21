@@ -5,12 +5,12 @@ class Vetor{
     int indice, tamanho;
 
  public:
-    Vetor(){
+    Vetor() {
         indice = -1;
-        tamanho = 0; 
+        tamanho = 0;
     }
 
-    Vetor(int t){
+    explicit Vetor(int t) {
         tamanho = t;
         indice = -1;
         vetor = new T[tamanho];
@@ -21,37 +21,37 @@ class Vetor{
         return indice;
     }
 
-    void adiciona(T elemento){
+    void adiciona(T elemento) {
         if (estaCheio()) throw "Vetor cheio";
         vetor[++indice] = elemento;
     }
 
-    T acessa(int ind, bool consulta){
+    T acessa(int ind, bool consulta) {
         if ((ind < 0) || (ind > indice)) throw "Indice fora dos limites";
-        if(!consulta) indice--;
+        if (!consulta) indice--;
         T dado = vetor[ind];
         int i = ind;
-        for(;i < (indice + 1); i++) vetor[i] = vetor[i + 1];
+        for (; i < (indice + 1); i++) vetor[i] = vetor[i + 1];
         return dado;
     }
 
-    T retiraUltimo(){
-        acessa(indice,false); 
+    T retiraUltimo() {
+        return acessa(indice, false);
     }
 
-    T retiraPrimeiro(){
-        acessa(0,false); 
+    T retiraPrimeiro() {
+        return acessa(0, false);
     }
 
-    T consultaUltimo(){
-        acessa(indice,true); 
+    T consultaUltimo() {
+        return acessa(indice, true);
     }
 
-    T consultaPrimeiro(){
-        acessa(0,true); 
+    T consultaPrimeiro() {
+        return acessa(0, true);
     }
 
-    void limpa(){
+    void limpa() {
         indice = -1;
     }
 
@@ -64,3 +64,4 @@ class Vetor{
         return false;
     }
 };
+

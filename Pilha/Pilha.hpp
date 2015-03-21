@@ -1,15 +1,13 @@
 #include "Vetor.hpp"
 template<typename T>
 class Pilha : private Vetor<T>{
- private:
-
  public:
-    Pilha(int t) : Vetor<T>(t) {}
+    explicit Pilha(int t) : Vetor<T>(t) {}
 
     void empilha(T dado) {
         Vetor<T>::adiciona(dado);
     }
-    
+
     T desempilha() {
         return Vetor<T>::retiraUltimo();
     }
