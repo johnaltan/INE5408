@@ -3,28 +3,27 @@ template<typename T>
 class Fila : private Vetor<T> {
  private:
 
-
  public:
-	Fila(int tam) : Vetor<T>(tam){}
-	void inclui(T dado){
+	Fila(int tam) : Vetor<T>(tam) {}
+	void inclui(T dado) {
         Vetor<T>::adiciona(dado);
     }
-	T retira(){
+	T retira() {
         return Vetor<T>::retiraPrimeiro();
     }
-	T ultimo(){
+	T ultimo() {
         return Vetor<T>::consultaUltimo();
     }
-	int getUltimo(){
+	int getUltimo() {
         return Vetor<T>::getIndice();
     }
-	bool filaCheia(){
+	bool filaCheia() {
         return Vetor<T>::estaCheio();
     }
-	bool filaVazia(){
+	bool filaVazia() {
         return Vetor<T>::estaVazio();
     }
-	void inicializaFila(){
+	void inicializaFila() {
         Vetor<T>::limpa(); 
     }
 };
