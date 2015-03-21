@@ -1,47 +1,45 @@
-#ifndef _H_PILHA_H
-#define _H_PILHA_H
-
 template<typename T>
 class Pilha {
-    private:
+ private:
         int posicaoTopo, tamanho;
         T *pilha;
 
-    public:
-        Pilha(){
+ public:
+        Pilha() {
             posicaoTopo = -1;
             tamanho = 0;
         }
-        Pilha<T>(int t){
-            pilha = new T[t];           
+        Pilha<T>(int t) {
+            pilha = new T[t];
             posicaoTopo = -1;
             tamanho = t;
         }
-        void empilha(T dado){
-            if(PilhaCheia()) throw "Pilha cheia";
+        void empilha(T dado) {
+            if (PilhaCheia()) throw "Pilha cheia";
             pilha[++posicaoTopo] = dado;
         }
-        T desempilha(){
-            if(PilhaVazia()) throw "Pilha vazia";
+        T desempilha() {
+            if (PilhaVazia()) throw "Pilha vazia";
             posicaoTopo--;
             return pilha[posicaoTopo + 1];
         }
-        T topo(){
+        T topo() {
             return pilha[posicaoTopo];
         }
-        int getPosTopo(){
+        int getPosTopo() {
+            if (PilhaVazia()) throw "Pilha vazia";
             return posicaoTopo;
         }
-        void limparPilha(){
+        void limparPilha() {
             posicaoTopo = -1;
         }
-        bool PilhaVazia(){
-            if(posicaoTopo < 0) return true;
+        bool PilhaVazia() {
+            if (posicaoTopo < 0) return true;
             return false;
         }
-        bool PilhaCheia(){
-            if(posicaoTopo >= (tamanho - 1)) return true;
+        bool PilhaCheia() {
+            if (posicaoTopo >= (tamanho - 1)) return true;
             return false;
         }
 };
-#endif
+
