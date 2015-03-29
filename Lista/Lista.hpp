@@ -1,3 +1,8 @@
+#define LISTACHEIA -1
+#define LISTAVAZIA -2
+#define LIMITEINDICE -3
+#define ELEMENTONAOENCONTRADO -4
+
 template<typename T>
 class Lista{
  private:
@@ -17,13 +22,13 @@ class Lista{
     }
 
     int getIndice() {
-        if (estaVazio()) throw "Lista vazia";
+        if (listaVazia()) throw LISTAVAZIA;
         return indice;
     }
 
-    void adicionaPosicao(T elemento, int ind){
-        if (estaCheio()) throw "Lista cheia";
-        if ((ind < 0) || (ind > indice + 1)) throw "Indice fora dos limites";
+    void adicionaNaPosicao(T elemento, int ind) {
+        if (listaCheia()) throw LISTACHEIA;
+        if ((ind < 0) || (ind > indice + 1)) throw LIMITEINDICE;
         indice++;
         int i = ind;
         for (; i < indice; i++) lista[i + 1] = lista[i];
@@ -31,17 +36,37 @@ class Lista{
     }
 
     void adiciona(T elemento) {
-        adicionaPosicao(elemento, indice + 1);
+        adicionaNaPosicao(elemento, indice + 1);
     }
 
-    void adicionaEmOrdem(T elemento){
+    void adicionaNoInicio(T elemento) {
+        adicionaNaPosicao(elemento, 0);
+    }
+
+    void adicionaEmOrdem(T elemento) {
         int i = 0;
-        for (; i <= indice; i++) if(elemento > lista[i]) break;
-        adicionaPosicao(elemento,i);
+        for (; ((i <= indice) && (elemento > lista[i])); i++) {}
+        adicionaNaPosicao(elemento, i);
+    }
+
+    int posicao(T elemento) {
+        int ind = 0;
+        for (; ((ind <= indice) && (elemento != lista[ind])); ind++) {}
+        if (ind > indice) throw ELEMENTONAOENCONTRADO;
+        return ind;
+    }
+
+    bool contem(T elemento) {
+        try {
+            return posicao(elemento) > -1;
+        } catch(int s) {
+        }
+        return false;
     }
 
     T acessa(int ind, bool consulta) {
-        if ((ind < 0) || (ind > indice)) throw "Indice fora dos limites";
+        if ((ind < 0) || (ind > indice)) throw LIMITEINDICE;
+        if (listaVazia()) throw LISTAVAZIA;
         if (!consulta) indice--;
         T dado = lista[ind];
         int i = ind;
@@ -49,11 +74,19 @@ class Lista{
         return dado;
     }
 
-    T retiraUltimo() {
+    T retiraEspecifico(T elemento) {
+        return retiraDaPosicao(posicao(elemento));
+    }
+
+    T retiraDaPosicao(int posicao) {
+        return acessa(posicao, false);
+    }
+
+    T retira() {
         return acessa(indice, false);
     }
 
-    T retiraPrimeiro() {
+    T retiraDoInicio() {
         return acessa(0, false);
     }
 
@@ -65,15 +98,29 @@ class Lista{
         return acessa(0, true);
     }
 
-    void limpa() {
+    void destroiLista() {
         indice = -1;
     }
 
-    bool estaVazio() {
+    bool maior(T dado1, T dado2) {
+        if (dado1 > dado2) return true;
+        return false;
+    }
+
+    bool menor(T dado1, T dado2) {
+        if (dado1 < dado2) return true;
+        return false;
+    }
+
+    bool igual(T dado1, T dado2) {
+       return ((!maior(dado1, dado2)) && (!menor(dado1, dado2)));
+    }
+
+    bool listaVazia() {
         if (indice < 0) return true;
         return false;
     }
-    bool estaCheio() {
+    bool listaCheia() {
         if (indice >= (tamanho - 1)) return true;
         return false;
     }
