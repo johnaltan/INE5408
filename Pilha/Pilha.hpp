@@ -1,35 +1,35 @@
-#include "Vetor.hpp"
+#include "Lista.hpp"
 template<typename T>
-class Pilha : private Vetor<T>{
+class Pilha : private Lista<T>{
  public:
-    explicit Pilha(int t) : Vetor<T>(t) {}
+    explicit Pilha(int t) : Lista<T>(t) {}
 
     void empilha(T dado) {
-        Vetor<T>::adiciona(dado);
+        Lista<T>::adiciona(dado);
     }
 
     T desempilha() {
-        return Vetor<T>::retiraUltimo();
+        return Lista<T>::retiraUltimo();
     }
 
     T topo() {
-        return Vetor<T>::consultaUltimo();
+        return Lista<T>::consultaUltimo();
     }
 
     int getPosTopo() {
-        return Vetor<T>::getIndice();
+        return Lista<T>::getIndice();
     }
 
     void limparPilha() {
-        Vetor<T>::limpa();
+        Lista<T>::limpa();
     }
 
     bool PilhaVazia() {
-        return Vetor<T>::estaVazio();
+        return Lista<T>::estaVazio();
     }
 
     bool PilhaCheia() {
-        return Vetor<T>::estaCheio();
+        return Lista<T>::estaCheio();
     }
 };
 

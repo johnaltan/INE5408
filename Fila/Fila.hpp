@@ -1,28 +1,28 @@
-#include "Vetor.hpp"
+#include "Lista.hpp"
 template<typename T>
-class Fila : private Vetor<T> {
+class Fila : private Lista<T> {
  public:
-    explicit Fila(int tam) : Vetor<T>(tam) {}
+    explicit Fila(int tam) : Lista<T>(tam) {}
     void inclui(T dado) {
-        Vetor<T>::adiciona(dado);
+        Lista<T>::adiciona(dado);
     }
     T retira() {
-        return Vetor<T>::retiraPrimeiro();
+        return Lista<T>::retiraPrimeiro();
     }
     T ultimo() {
-        return Vetor<T>::consultaUltimo();
+        return Lista<T>::consultaUltimo();
     }
     int getUltimo() {
-        return Vetor<T>::getIndice();
+        return Lista<T>::getIndice();
     }
     bool filaCheia() {
-        return Vetor<T>::estaCheio();
+        return Lista<T>::estaCheio();
     }
     bool filaVazia() {
-        return Vetor<T>::estaVazio();
+        return Lista<T>::estaVazio();
     }
     void inicializaFila() {
-        Vetor<T>::limpa();
+        Lista<T>::limpa();
     }
 };
 
