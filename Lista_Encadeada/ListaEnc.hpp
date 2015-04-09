@@ -1,3 +1,4 @@
+#include <stdlib.h>
 #include "Elemento.hpp"
 
 #define ERROLISTACHEIA -1
@@ -25,6 +26,10 @@ class ListaEnc {
 	    if (novo == NULL) throw ERROLISTACHEIA;
 		this->head = novo;
 		this->size++;
+	}
+
+	Elemento<T> *getHead() {
+		return this->head;
 	}
 
 	T retiraDoInicio() {
