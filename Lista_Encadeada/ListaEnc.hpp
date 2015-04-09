@@ -32,6 +32,14 @@ class ListaEnc {
 		return this->head;
 	}
 
+	int getSize() {
+		return this->size;
+	}
+
+	void setSize(int vSize) {
+	    this->size = vSize;
+	}
+
 	T retiraDoInicio() {
 		if (listaVazia()) throw ERROLISTAVAZIA;
 		Elemento<T> *velho = this->head;
