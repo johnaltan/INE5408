@@ -9,10 +9,16 @@
 template<typename T>
 class ListaDupla {
  public:
+	/**
+	 * Construtor padrao, inicializa lista.
+	*/
 	ListaDupla() {
 		this->head = NULL;
 		this->size = -1;
 	}
+	/**
+	 * Destrutor padrao, elimina todos os elementos da lista.
+	*/
 	~ListaDupla() {
 		while(this->head != NULL) {
 			ElementoDuplo<T> *aux = this->head;
@@ -20,6 +26,9 @@ class ListaDupla {
 			delete aux;
 		}
 	}
+	/**
+	 * Adiciona o dado no inicio da lista.
+	*/
 	void adicionaNoInicioDuplo(const T& dado) {
 		ElementoDuplo<T> *novo = new ElementoDuplo<T>(dado, NULL, this->head);
 		if (novo == NULL) throw ERROLISTACHEIA;
@@ -27,6 +36,9 @@ class ListaDupla {
 		this->head = novo;
 		this->size++;
 	}
+	/**
+	 * Retira o dado do primeiro elemento da lista e o remove.
+	*/
 	T retiraDoInicioDuplo() {
 		if (listaVazia()) throw ERROLISTAVAZIA;
 		ElementoDuplo<T> *velho = this->head;
@@ -37,9 +49,15 @@ class ListaDupla {
 		delete velho;
 		return dado;
 	}
+	/**
+	 * Remove o primeiro elemento da lista.
+	*/
 	void eliminaDoInicioDuplo() {
 		retiraDoInicioDuplo();
 	}
+	/**
+	 * Adiciona o dado na posicao.
+	*/
 	void adicionaNaPosicaoDuplo(const T& dado, int pos) {
 		if((pos < 0) || (pos > (this->size + 1))) throw ERROPOSICAO;
 		if(pos == 0) {
@@ -56,6 +74,9 @@ class ListaDupla {
 		anterior->setProximo(novo);
 		this->size++;
 	}
+	/**
+	 * Retorna a posicao do dado na lista.
+	*/
 	int posicaoDuplo(const T& dado) const {
 		if(listaVazia()) throw ERROLISTAVAZIA;
 		int pos = 0;
@@ -65,6 +86,9 @@ class ListaDupla {
 		if(pos > size) throw ERROPOSICAO;
 		return pos;
 	}
+	/**
+	 * Retorna o endereco de memoria do dado.
+	*/
 	T* posicaoMemDuplo(const T& dado) const {
 		if(listaVazia()) throw ERROLISTAVAZIA;
 		if(dado == NULL) throw ERROPARAMETRO;
@@ -74,12 +98,18 @@ class ListaDupla {
 		if(aux == NULL) return NULL;
 		return &aux->getInfo();
 	}
+	/**
+	 * Verifica se a lista contem o dado.
+	*/
 	bool contemDuplo(const T& dado) {
 		try {
 			return (posicaoDuplo(dado) >= 0);
 		}catch(int s) {}
 		return false;
 	}
+	/**
+	 * Retorna o dado da posicao e remove o respectivo elemento da lista.
+	*/
 	T retiraDaPosicaoDuplo(int pos) {
 		if(listaVazia()) throw ERROLISTAVAZIA;
 		if((pos < 0) || (pos > this->size)) throw ERROPOSICAO;
@@ -98,16 +128,28 @@ class ListaDupla {
 		delete velho;
 		return dado;
 	}
+	/**
+	 * Adiciona o dado no final da lista.
+	*/
 	void adicionaDuplo(const T& dado) {
 		adicionaNaPosicaoDuplo(dado, size + 1);
 	}
+	/**
+	 * Retorna o ultimo dado da lista e remove o elemento.
+	*/
 	T retiraDuplo() {
 		return retiraDaPosicaoDuplo(size);
 	}
+	/**
+	 * Remove o dado da lista, e retorna o dado removido.
+	*/
 	T retiraEspecificoDuplo(const T& dado) {
 		int pos = posicaoDuplo(dado);
 		return retiraDaPosicaoDuplo(pos);
 	}
+	/**
+	 * Retorna o dado da posicao, sem remover o elemento.
+	*/
 	T mostra(int pos) {
 		if(listaVazia()) throw ERROLISTAVAZIA;
 		if((pos < 0) || (pos > this->size)) throw ERROPOSICAO;
@@ -117,6 +159,9 @@ class ListaDupla {
 		    i++, aux = aux->getProximo()) {}
 		return aux->getInfo();
 	}
+	/**
+	 * Adiciona os elementos em ordem crescente.
+	*/
 	void adicionaEmOrdem(const T& data) {
 		int pos = 0;
 		ElementoDuplo<T> *aux;
@@ -124,9 +169,15 @@ class ListaDupla {
 		pos++, aux = aux->getProximo()) {}
 		adicionaNaPosicaoDuplo(data, pos);
 	}
+	/**
+	 * Retorna a posicao do ultimo elemento.
+	*/
 	int verUltimo() {
 		return posicaoDuplo(mostra(size));
 	}
+	/**
+	 * Verifica se a lista esta vazia.
+	*/
 	bool listaVazia() const {
 		if (this->size < 0) return true;
 		return false;
