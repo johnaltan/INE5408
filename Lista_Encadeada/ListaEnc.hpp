@@ -14,7 +14,7 @@ class ListaEnc {
 		this->size = -1;
 	}
 	~ListaEnc() {
-		while(this->head != NULL) {
+		for(; this->size > -1; this->size--) {
 			Elemento<T> *aux = this->head;
 			this->head = aux->getProximo();
 			delete aux;
@@ -73,7 +73,7 @@ class ListaEnc {
 		if(listaVazia()) throw ERROLISTAVAZIA;
 		int pos = 0;
 		Elemento<T> *aux;
-		for(aux = this->head; ((aux != NULL) && (aux->getInfo() != dado));
+		for(aux = this->head; ((pos <= this->size) && (aux->getInfo() != dado));
 		            pos++, aux = aux->getProximo()) {}
 		if(pos > size) throw ERROPOSICAO;
 		return pos;
@@ -82,8 +82,9 @@ class ListaEnc {
 	T* posicaoMem(const T& dado) const {
 		if(listaVazia()) throw ERROLISTAVAZIA;
 		if(dado == NULL) throw ERROPARAMETRO;
+		int i = 0;
 		Elemento<T> *aux;
-		for(aux = this->head; ((aux != NULL) && (aux->getInfo() != dado));
+		for(aux = this->head; ((i <= this->size) && (aux->getInfo() != dado));
 		aux = aux->getProximo()) {}
 		if(aux == NULL) return NULL;
 		return &aux->getInfo();
@@ -133,7 +134,7 @@ class ListaEnc {
 	void adicionaEmOrdem(const T& data) {
 		int pos = 0;
 		Elemento<T> *aux;
-		for(aux = this->head; ((aux != NULL) && (aux->getInfo() < data));
+		for(aux = this->head; ((pos <= this->size) && (aux->getInfo() < data));
 		pos++, aux = aux->getProximo()) {}
 		adicionaNaPosicao(data, pos);
 	}
