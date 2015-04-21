@@ -20,11 +20,23 @@ class ListaDupla {
 	 * Destrutor padrao, elimina todos os elementos da lista.
 	*/
 	~ListaDupla() {
-		while(this->head != NULL) {
+		for(; this->size > -1; this->size--) {
 			ElementoDuplo<T> *aux = this->head;
 			this->head = aux->getProximo();
 			delete aux;
 		}
+	}
+
+	ElementoDuplo<T> *getHead() {
+		return this->head;
+	}
+
+	int getSize() {
+		return this->size;
+	}
+
+	void setSize(int vSize) {
+	    this->size = vSize;
 	}
 	/**
 	 * Adiciona o dado no inicio da lista.
@@ -81,7 +93,7 @@ class ListaDupla {
 		if(listaVazia()) throw ERROLISTAVAZIA;
 		int pos = 0;
 		ElementoDuplo<T> *aux;
-		for(aux = this->head; ((aux != NULL) && (aux->getInfo() != dado));
+		for(aux = this->head; ((pos <= this->size) && (aux->getInfo() != dado));
 		            pos++, aux = aux->getProximo()) {}
 		if(pos > size) throw ERROPOSICAO;
 		return pos;
@@ -92,8 +104,9 @@ class ListaDupla {
 	T* posicaoMemDuplo(const T& dado) const {
 		if(listaVazia()) throw ERROLISTAVAZIA;
 		if(dado == NULL) throw ERROPARAMETRO;
+		int i = 0;
 		ElementoDuplo<T> *aux;
-		for(aux = this->head; ((aux != NULL) && (aux->getInfo() != dado));
+		for(aux = this->head; ((i <= this->size) && (aux->getInfo() != dado));
 		aux = aux->getProximo()) {}
 		if(aux == NULL) return NULL;
 		return &aux->getInfo();
@@ -165,7 +178,7 @@ class ListaDupla {
 	void adicionaEmOrdem(const T& data) {
 		int pos = 0;
 		ElementoDuplo<T> *aux;
-		for(aux = this->head; ((aux != NULL) && (aux->getInfo() < data));
+		for(aux = this->head; ((pos <= this->size) && (aux->getInfo() < data));
 		pos++, aux = aux->getProximo()) {}
 		adicionaNaPosicaoDuplo(data, pos);
 	}
